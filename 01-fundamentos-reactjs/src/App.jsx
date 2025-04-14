@@ -13,7 +13,7 @@ export function App() {
         <Sidebar/>
         <main>
           <Post author="Bernardo Proti" content="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
-          <Post author="Lucas Miranda" content="Um novo post legal sobre o que fiz hoje." />
+          <Post author="Guilherme Pereira" content="Um novo post legal sobre o que fiz hoje." />
         </main>
       </div>
     </div>
