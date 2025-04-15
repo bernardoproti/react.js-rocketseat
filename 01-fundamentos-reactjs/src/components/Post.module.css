@@ -119,3 +119,7 @@
     background: var(--green-light);
     cursor: pointer;
 }
+
+.commentList {
+    margin-top: 2rem;
+}
