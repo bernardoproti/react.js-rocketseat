@@ -5,8 +5,7 @@ import { CyclesContext } from '../../../../contexts/CycleContext'
 
 export function Countdown() {
   const {
-    activeCycle, activeCycleId, amountSecondsPassed,
-    handleFinishedCycle, setSecondsPassed,
+    activeCycle, activeCycleId, amountSecondsPassed, setSecondsPassed,
   } = useContext(CyclesContext)
 
   const totalSeconds = activeCycle
@@ -19,11 +18,10 @@ export function Countdown() {
     if (activeCycle) {
       interval = setInterval(() => {
         const secondsDifference = differenceInSeconds(
-          new Date(), activeCycle.startDate,
+          new Date(), new Date(activeCycle.startDate),
         )
 
         if (secondsDifference >= totalSeconds) {
-          handleFinishedCycle()
           setSecondsPassed(totalSeconds)
           clearInterval(interval)
         } else {
@@ -36,8 +34,7 @@ export function Countdown() {
       clearInterval(interval)
     }
   }, [
-    activeCycle, activeCycleId, totalSeconds,
-    setSecondsPassed, handleFinishedCycle,
+    activeCycle, activeCycleId, totalSeconds, setSecondsPassed,
   ])
 
   const currentSeconds = activeCycle
@@ -53,6 +50,8 @@ export function Countdown() {
   useEffect(() => {
     if (activeCycle) {
       document.title = `${minutes}:${seconds}`
+    } else {
+      document.title = 'Ignite Timer'
     }
   }, [activeCycle, minutes, seconds])
 

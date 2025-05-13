@@ -1,7 +1,14 @@
-import { createContext, useReducer, useState, type ReactNode } from 'react'
+import {
+  createContext, useEffect, useReducer, useState, type ReactNode,
+} from 'react'
 import { NewCycleFormData } from '../pages/Home'
+import { cycleReducer } from '../reducers/cycles/reducer'
+import {
+  addNewCycleAction, finishCycleAction, interruptCycleAction,
+} from '../reducers/cycles/actions'
+import { differenceInSeconds } from 'date-fns'
 
-interface Cycle extends NewCycleFormData {
+export interface Cycle extends NewCycleFormData {
   id: string;
   startDate: Date;
   interruptedDate?: Date;
@@ -25,60 +32,43 @@ interface CyclesContextProviderProps {
   children: ReactNode;
 }
 
-interface CyclesState {
-  cycles: Cycle[];
-  activeCycleId: string | null;
-}
-
 export function CyclesContextProvider({
   children,
 }: CyclesContextProviderProps) {
-  const [cyclesState, dispatch] = useReducer((
-    state: CyclesState, action: any,
-  ) => {
-    switch (action.type) {
-      case 'ADD_NEW_CYCLE': return {
-        ...state,
-        cycles: [...state.cycles, action.payload.newCycle],
-        activeCycleId: action.payload.newCycle.id,
+  const [cyclesState, dispatch] = useReducer(
+    cycleReducer,
+    {
+      cycles: [],
+      activeCycleId: null,
+    },
+    (initialState) => {
+      const storedStateAsJSON = localStorage.getItem(
+        '@ignite-timer:cycles-state-1.0.0',
+      )
+      if (storedStateAsJSON) {
+        return JSON.parse(storedStateAsJSON)
       }
-      case 'INTERRUPT_CYCLE': return {
-        ...state,
-        cycles: [
-          ...state.cycles,
-          state.cycles.map(cycle => {
-            if (cycle.id === state.activeCycleId) {
-              return { ...cycle, interruptedDate: new Date() }
-            } else {
-              return cycle
-            }
-          }),
-        ],
-        activeCycleId: null,
-      }
-      case 'FINISH_CYCLE': return {
-        ...state,
-        cycles: [
-          ...state.cycles,
-          state.cycles.map(cycle => {
-            if (cycle.id === state.activeCycleId) {
-              return { ...cycle, finishedDate: new Date() }
-            } else {
-              return cycle
-            }
-          }),
-        ],
-      }
-      default: return state
-    }
-  }, {
-    cycles: [],
-    activeCycleId: null,
-  })
 
-  const [amountSecondsPassed, setAmountSecondsPassed] = useState(0)
+      return initialState
+    },
+  )
+
   const { cycles, activeCycleId } = cyclesState
   const activeCycle = cycles.find(cycle => cycle.id === activeCycleId)
+
+  const [amountSecondsPassed, setAmountSecondsPassed] = useState(() => {
+    if (activeCycle) {
+      return differenceInSeconds(new Date(), new Date(activeCycle.startDate))
+    }
+
+    return 0
+  })
+
+  useEffect(() => {
+    const stateJSON = JSON.stringify(cyclesState)
+
+    localStorage.setItem('@ignite-timer:cycles-state-1.0.0', stateJSON)
+  }, [cyclesState])
 
   function setSecondsPassed(seconds: number) {
     setAmountSecondsPassed(seconds)
@@ -92,32 +82,17 @@ export function CyclesContextProvider({
       startDate: new Date(),
     }
 
-    dispatch({
-      type: 'ADD_NEW_CYCLE',
-      payload: {
-        newCycle,
-      },
-    })
+    dispatch(addNewCycleAction(newCycle))
 
     setAmountSecondsPassed(0)
   }
 
   function finishCycle() {
-    dispatch({
-      type: 'FINISH_CYCLE',
-      payload: {
-        activeCycleId,
-      },
-    })
+    dispatch(finishCycleAction())
   }
 
   function interruptCycle() {
-    dispatch({
-      type: 'INTERRUPT_CYCLE',
-      payload: {
-        activeCycleId,
-      },
-    })
+    dispatch(interruptCycleAction())
   }
 
   return (
