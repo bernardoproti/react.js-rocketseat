@@ -1,3 +1,5 @@
+/* Atualizações no arquivo de estilos */
+
 import styled from 'styled-components'
 
 export const FormContainer = styled.div`
@@ -42,4 +44,16 @@ export const TaskInput = styled(BaseInput)`
 
 export const MinutesAmountInput = styled(BaseInput)`
   width: 4rem;
+  text-align: center;
+
+  & {
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+    }
+  }
 `

@@ -34,6 +34,7 @@ export function NewCycleForm() {
         disabled={!!activeCycle}
         {...register('minutesAmount', { valueAsNumber: true })}
       />
+
       <span>minutos.</span>
     </FormContainer>
   )
