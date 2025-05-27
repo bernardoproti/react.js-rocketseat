@@ -39,6 +39,14 @@
       "type": "outcome",
       "createdAt": "2025-05-27T13:09:59.660Z",
       "id": 5
+    },
+    {
+      "description": "Iogurte de Morango",
+      "price": 5,
+      "category": "Alimentação",
+      "type": "outcome",
+      "createdAt": "2025-05-27T17:29:52.506Z",
+      "id": 6
     }
   ]
 }
