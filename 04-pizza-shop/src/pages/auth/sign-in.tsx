@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import * as z from "zod";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
-import { Link } from "react-router-dom";
 
 const signInFormValidationSchema = z.object({
   email: z.string().email(),
@@ -43,9 +43,7 @@ export function SignIn() {
     <>
       <div className="p-8">
         <Button variant="ghost" asChild className="absolute right-8 top-8">
-          <Link to="/sign-up">
-            Novo estabelecimento
-          </Link>
+          <Link to="/sign-up">Novo estabelecimento</Link>
         </Button>
 
         <div className="w-[350px] flex flex-col justify-center gap-6">
