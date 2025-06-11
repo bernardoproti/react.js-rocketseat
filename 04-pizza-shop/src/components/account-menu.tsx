@@ -1,3 +1,5 @@
+import { Building, ChevronDown, LogOut } from "lucide-react";
+import { Button } from "./ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,8 +8,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { Button } from "./ui/button";
-import { Building, ChevronDown, LogOut } from "lucide-react";
 
 export function AccountMenu() {
   return (

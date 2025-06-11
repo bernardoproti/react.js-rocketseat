@@ -14,7 +14,7 @@ const signInFormValidationSchema = z.object({
 type SignInForm = z.infer<typeof signInFormValidationSchema>;
 
 export function SignIn() {
-  useDocumentTitle("Sign In");
+  useDocumentTitle("Entrar");
 
   const {
     register,

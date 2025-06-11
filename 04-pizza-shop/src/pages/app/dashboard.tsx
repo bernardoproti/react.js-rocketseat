@@ -1,7 +1,7 @@
 import { useDocumentTitle } from "../../hooks/useDocumentTitle";
 
 export function Dashboard() {
-  useDocumentTitle("Dashboard");
+  useDocumentTitle("Painel");
 
   return (
     <>

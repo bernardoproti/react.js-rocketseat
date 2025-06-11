@@ -17,7 +17,7 @@ const signUpFormValidationSchema = z.object({
 type SignUpForm = z.infer<typeof signUpFormValidationSchema>;
 
 export function SignUp() {
-  useDocumentTitle("Sign Up");
+  useDocumentTitle("Cadastrar");
   const navigate = useNavigate();
 
   const {
