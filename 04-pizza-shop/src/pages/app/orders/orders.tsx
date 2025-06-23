@@ -36,6 +36,7 @@ export function Orders() {
               </TableHeader>
               <TableBody>
                 {Array.from({ length: 10 }).map((_, i) => {
+                  // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                   return <OrderTableRow key={i} />;
                 })}
               </TableBody>

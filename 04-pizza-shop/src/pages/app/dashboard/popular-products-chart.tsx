@@ -72,11 +72,14 @@ export function PopularProductsChart() {
                 );
               }}
             >
-              {data.map((_, index) => {
+              {data.map((_, i) => {
                 return (
                   <Cell
-                    key={`cell-${index}`}
-                    fill={COLORS[index]}
+                    key={`cell-${
+                      // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                      i
+                    }`}
+                    fill={COLORS[i]}
                     className="stroke-background hover:opacity-80"
                   />
                 );
