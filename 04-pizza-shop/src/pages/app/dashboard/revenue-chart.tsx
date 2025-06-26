@@ -9,6 +9,10 @@ import {
 import { DateRangePicker } from "@/components/ui/date-range-picker";
 import { Label } from "@/components/ui/label";
 import { useQuery } from "@tanstack/react-query";
+import { subDays } from "date-fns";
+import { Loader2, TriangleAlert } from "lucide-react";
+import { useMemo, useState } from "react";
+import type { DateRange } from "react-day-picker";
 import {
   CartesianGrid,
   Line,
@@ -18,10 +22,6 @@ import {
   YAxis,
 } from "recharts";
 import colors from "tailwindcss/colors";
-import type { DateRange } from "react-day-picker";
-import { useMemo, useState } from "react";
-import { subDays } from "date-fns";
-import { Loader2, TriangleAlert } from "lucide-react";
 
 export function RevenueChart() {
   const [dateRange, setDateRange] = useState<DateRange | undefined>({

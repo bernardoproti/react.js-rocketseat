@@ -17,8 +17,8 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { OrderStatus } from "./order-status";
 import { OrderDetailsSkeleton } from "./order-details-skeleton";
+import { OrderStatus } from "./order-status";
 
 export interface OrderDetailsProps {
   orderId: string;

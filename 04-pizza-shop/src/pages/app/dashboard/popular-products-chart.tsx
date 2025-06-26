@@ -65,7 +65,9 @@ export function PopularProductsChart() {
                       dominantBaseline="central"
                     >
                       {popularProducts[index].product.length > 12
-                        ? popularProducts[index].product.substring(0, 12).concat("...")
+                        ? popularProducts[index].product
+                            .substring(0, 12)
+                            .concat("...")
                         : popularProducts[index].product}{" "}
                       ({value})
                     </text>
@@ -89,7 +91,7 @@ export function PopularProductsChart() {
           </ResponsiveContainer>
         ) : (
           <div className="flex h-[240x] w-full items-center justify-center">
-            <Loader2 className="h-8 w-8 text-muted-foreground animate-spin"/>
+            <Loader2 className="h-8 w-8 text-muted-foreground animate-spin" />
           </div>
         )}
       </CardContent>
