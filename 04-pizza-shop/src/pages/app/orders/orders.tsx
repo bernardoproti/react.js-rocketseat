@@ -1,3 +1,4 @@
+import { getOrders } from "@/api/get-orders";
 import { Pagination } from "@/components/pagination";
 import {
   Table,
@@ -7,12 +8,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
-import { OrderTableFilters } from "./order-table-filters";
-import { OrderTableRow } from "./order-table-row";
 import { useQuery } from "@tanstack/react-query";
-import { getOrders } from "@/api/get-orders";
 import { useSearchParams } from "react-router-dom";
 import z from "zod";
+import { OrderTableFilters } from "./order-table-filters";
+import { OrderTableRow } from "./order-table-row";
 
 export function Orders() {
   useDocumentTitle("Pedidos");

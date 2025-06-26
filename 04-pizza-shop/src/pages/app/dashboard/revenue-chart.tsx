@@ -1,3 +1,4 @@
+import { getDailyRevenueInPeriod } from "@/api/get-daily-revenue-in-period";
 import {
   Card,
   CardContent,
@@ -5,6 +6,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { DateRangePicker } from "@/components/ui/date-range-picker";
+import { Label } from "@/components/ui/label";
+import { useQuery } from "@tanstack/react-query";
 import {
   CartesianGrid,
   Line,
@@ -14,61 +18,83 @@ import {
   YAxis,
 } from "recharts";
 import colors from "tailwindcss/colors";
-
-const data = [
-  { date: "10/12", revenue: 1200 },
-  { date: "11/12", revenue: 800 },
-  { date: "12/12", revenue: 200 },
-  { date: "13/12", revenue: 1500 },
-  { date: "14/12", revenue: 2000 },
-  { date: "15/12", revenue: 2300 },
-  { date: "16/12", revenue: 640 },
-];
+import type { DateRange } from "react-day-picker";
+import { useMemo, useState } from "react";
+import { subDays } from "date-fns";
 
 export function RevenueChart() {
+  const [dateRange, setDateRange] = useState<DateRange | undefined>({
+    from: subDays(new Date(), 7),
+    to: new Date(),
+  });
+
+  const { data: dailyRevenueInPeriod } = useQuery({
+    queryKey: ["metrics", "daily-revenue-in-period", dateRange],
+    queryFn: () => getDailyRevenueInPeriod({
+      from: dateRange?.from,
+      to: dateRange?.to
+    }),
+  });
+
+  const chartData = useMemo(() => {
+    return dailyRevenueInPeriod?.map(chartItem => {
+      return {
+        date: chartItem.date,
+        receipt: chartItem.receipt / 100,
+      }
+    })
+  }, [dailyRevenueInPeriod])
+
   return (
     <Card className="col-span-6">
-      <CardHeader className="flex-row items-center justify-between pb-8">
+      <CardHeader className="grid grid-cols-2 pb-8">
         <div className="space-y-1">
           <CardTitle className="text-base font-medium">
             Receita no período
           </CardTitle>
           <CardDescription>Receita diária no período</CardDescription>
         </div>
+
+        <div className="flex items-center gap-3 justify-self-end">
+          <Label>Período</Label>
+          <DateRangePicker date={dateRange} onDateChange={setDateRange} />
+        </div>
       </CardHeader>
       <CardContent>
-        <ResponsiveContainer width="100%" height={240}>
-          <LineChart data={data} style={{ fontSize: 12 }}>
-            <XAxis
-              dataKey="date"
-              stroke="#888"
-              axisLine={false}
-              tickLine={false}
-              dy={16}
-            />
-            <YAxis
-              stroke="#888"
-              axisLine={false}
-              tickLine={false}
-              width={80}
-              tickFormatter={(value: number) =>
-                value.toLocaleString("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
-                })
-              }
-            />
+        {chartData && (
+          <ResponsiveContainer width="100%" height={240}>
+            <LineChart data={chartData} style={{ fontSize: 12 }}>
+              <XAxis
+                dataKey="date"
+                stroke="#888"
+                axisLine={false}
+                tickLine={false}
+                dy={16}
+              />
+              <YAxis
+                stroke="#888"
+                axisLine={false}
+                tickLine={false}
+                width={80}
+                tickFormatter={(value: number) =>
+                  value.toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  })
+                }
+              />
 
-            <CartesianGrid vertical={false} className="stroke-muted" />
+              <CartesianGrid vertical={false} className="stroke-muted" />
 
-            <Line
-              type="linear"
-              strokeWidth={2}
-              dataKey="revenue"
-              stroke={colors.violet["500"]}
-            />
-          </LineChart>
-        </ResponsiveContainer>
+              <Line
+                type="linear"
+                strokeWidth={2}
+                dataKey="receipt"
+                stroke={colors.violet["500"]}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        )}
       </CardContent>
     </Card>
   );
