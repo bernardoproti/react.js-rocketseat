@@ -4,8 +4,26 @@ import { TableCell, TableRow } from "@/components/ui/table";
 import { DialogTrigger } from "@radix-ui/react-dialog";
 import { ArrowRight, Search, X } from "lucide-react";
 import { OrderDetails } from "./order-details";
+import { OrderStatus } from "./order-status";
+import { formatDistanceToNow } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
-export function OrderTableRow() {
+interface OrderTableRowProps {
+  order: {
+    orderId: string;
+    createdAt: Date;
+    status: "pending" | "canceled" | "processing" | "delivering" | "delivered";
+    customerName: string;
+    total: number;
+  };
+}
+
+export function OrderTableRow({ order }: OrderTableRowProps) {
+  const formattedDate = formatDistanceToNow(order.createdAt, {
+    addSuffix: true,
+    locale: ptBR
+  });
+
   return (
     <TableRow>
       <TableCell>
@@ -20,16 +38,20 @@ export function OrderTableRow() {
           <OrderDetails />
         </Dialog>
       </TableCell>
-      <TableCell className="font-mono text-xs font-medium">1</TableCell>
-      <TableCell className="text-muted-foreground">há 15 minutos</TableCell>
-      <TableCell>
-        <div className="flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full bg-slate-400" />
-          <span className="font-medium text-muted-foreground">Pendente</span>
-        </div>
+      <TableCell className="font-mono text-xs font-medium">
+        {order.orderId}
       </TableCell>
-      <TableCell className="font-medium">Bernardo Proti</TableCell>
-      <TableCell className="font-medium">R$159,90</TableCell>
+      <TableCell className="text-muted-foreground">{formattedDate}</TableCell>
+      <TableCell>
+        <OrderStatus status={order.status} />
+      </TableCell>
+      <TableCell className="font-medium">{order.customerName}</TableCell>
+      <TableCell className="font-medium">
+        {order.total.toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        })}
+      </TableCell>
       <TableCell>
         <Button variant="outline" size="xs">
           <ArrowRight className="h-3 w-3 mr-.5" />
