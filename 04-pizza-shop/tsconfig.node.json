@@ -1,25 +1,34 @@
 {
+  "extends": "./tsconfig.json",
   "compilerOptions": {
+    "composite": true,
+    "noEmit": false,
+    "declaration": true,
+    "declarationMap": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
     "target": "ES2022",
-    "lib": ["ES2023"],
+    "lib": [
+      "ES2023",
+      "DOM"
+    ],
     "module": "ESNext",
-    "skipLibCheck": true,
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": true,
-    "moduleDetection": "force",
-    "noEmit": true,
-
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "types": [
+      "vitest/globals",
+      "node"
+    ],
   },
-  "include": ["vite.config.ts"]
+  "include": [
+    "vite.config.ts",
+    "test/**/*.ts",
+    "test/**/*.tsx",
+    "test/**/*.js",
+    "test/**/*.jsx"
+, "test/setup.ts"  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src"
+  ]
 }

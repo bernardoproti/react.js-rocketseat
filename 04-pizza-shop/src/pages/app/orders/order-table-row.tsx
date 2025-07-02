@@ -12,8 +12,8 @@ import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { ArrowRight, Search, X } from "lucide-react";
 import { useState } from "react";
+import { OrderStatus } from "../../../components/order-status";
 import { OrderDetails } from "./order-details";
-import { OrderStatus } from "./order-status";
 
 interface OrderTableRowProps {
   order: {
