@@ -3,6 +3,7 @@ import { cancelOrder } from "@/api/cancel-order";
 import { deliverOrder } from "@/api/deliver-order";
 import { dispatchOrder } from "@/api/dispatch-order";
 import type { GetOrdersResponse } from "@/api/get-orders";
+import { OrderStatus } from "@/components/order-status";
 import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";
 import { TableCell, TableRow } from "@/components/ui/table";
@@ -12,7 +13,6 @@ import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { ArrowRight, Search, X } from "lucide-react";
 import { useState } from "react";
-import { OrderStatus } from "@/components/order-status";
 import { OrderDetails } from "./order-details";
 
 interface OrderTableRowProps {

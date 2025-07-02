@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { queryClient } from "@/lib/react-query";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { MemoryRouter } from "react-router-dom";
-import { queryClient } from "@/lib/react-query";
 import { SignIn } from "./sign-in";
 
 describe("SignIn", () => {
@@ -21,6 +21,8 @@ describe("SignIn", () => {
       },
     });
 
-    screen.debug();
+    expect(screen.getByLabelText<HTMLInputElement>("Seu e-mail").value).toEqual(
+      "bernardoproti@gmail.com"
+    );
   });
 });
