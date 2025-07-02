@@ -1,13 +1,13 @@
-import { signIn } from "@/api/sign-in";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Link, useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
 import * as z from "zod";
-import { Button } from "../../components/ui/button";
-import { Input } from "../../components/ui/input";
-import { Label } from "../../components/ui/label";
-import { useDocumentTitle } from "../../hooks/useDocumentTitle";
+import { signIn } from "@/api/sign-in";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
 const signInFormValidationSchema = z.object({
   email: z.string().email(),
