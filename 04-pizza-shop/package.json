@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:mock": "vite --port 5174 --mode mock",
     "build": "tsc -b && vite build",
     "lint": "npx @biomejs/biome check --write ./src",
     "preview": "vite preview",
@@ -53,10 +54,16 @@
     "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.4.1",
     "autoprefixer": "^10.4.21",
+    "msw": "^2.10.3",
     "tailwindcss": "^4.1.8",
     "tw-animate-css": "^1.3.4",
     "typescript": "~5.8.3",
     "vite": "^6.3.5",
     "vitest": "^3.2.4"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

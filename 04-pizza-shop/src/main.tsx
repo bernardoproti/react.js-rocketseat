@@ -1,10 +1,13 @@
 import { App } from "@/App";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { enableMSW } from "./api/mocks";
 
-// biome-ignore lint/style/noNonNullAssertion: <explanation>
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+enableMSW().then(() => {
+  // biome-ignore lint/style/noNonNullAssertion: <explanation>
+  createRoot(document.getElementById("root")!).render(
+    <StrictMode>
+      <App />
+    </StrictMode>
+  );
+});
