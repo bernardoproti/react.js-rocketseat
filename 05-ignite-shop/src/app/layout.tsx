@@ -1,8 +1,8 @@
-import { HeaderContainer } from "@/components/HeaderContainer";
 import "./globals.css";
 import { getCssText } from "@/styles";
 import { globalStyles } from "@/styles/global";
 import { Roboto } from "next/font/google";
+import { HeaderContainer } from "@/components/HeaderContainer";
 
 const roboto = Roboto({
   subsets: ["latin"],

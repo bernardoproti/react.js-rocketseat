@@ -1,21 +1,7 @@
-import { styled } from "@/styles";
 import Image from "next/image";
 import logoImg from "@/assets/logo.svg";
-
-const Container = styled("div", {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "flex-start",
-  justifyContent: "center",
-  minHeight: "100vh",
-})
-
-const Header = styled("header", {
-  padding: "2rem 0",
-  width: "100%",
-  maxWidth: 1180,
-  margin: "0 auto",
-})
+import { Container } from "./styles";
+import { Header } from "./styles";
 
 export function HeaderContainer() {
   return (
