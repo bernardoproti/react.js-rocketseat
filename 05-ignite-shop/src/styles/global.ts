@@ -1,4 +1,4 @@
-import { globalCss } from "."
+import { globalCss, styled } from "."
 
 export const globalStyles = globalCss({
   "*": {
@@ -17,4 +17,12 @@ export const globalStyles = globalCss({
     fontFamily: "Roboto",
     fontWeight: 400,
   },
+})
+
+export const Container = styled("div", {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+  justifyContent: "center",
+  minHeight: "100vh",
 })

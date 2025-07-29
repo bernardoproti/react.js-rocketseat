@@ -1,6 +1,6 @@
 import "./globals.css";
 import { getCssText } from "@/styles";
-import { globalStyles } from "@/styles/global";
+import { Container, globalStyles } from "@/styles/global";
 import { Roboto } from "next/font/google";
 import { HeaderContainer } from "@/components/HeaderContainer";
 
@@ -23,8 +23,10 @@ export default function RootLayout({
         <style id="stitches" dangerouslySetInnerHTML={{ __html: getCssText() }} />
       </head>
       <body>
-        <HeaderContainer />
-        {children}
+        <Container>
+          <HeaderContainer />
+          {children}
+        </Container>
       </body>
     </html>
   );
