@@ -2,8 +2,8 @@ import { styled } from "@/styles"
 
 export const Container = styled("main", {
   display: "flex",
-  gap: "3rem",
   width: "100%",
+  // gap: "3rem",
   maxWidth: "calc(100vw - ((100vw - 1180px) / 2))",
   marginLeft: "auto",
   minHeight: 656
@@ -12,10 +12,11 @@ export const Container = styled("main", {
 export const Product = styled("a", {
   background: "linear-gradient(100deg, #1ea483 0%, #7465d4 100%)",
   borderRadius: 8,
-  padding: ".25rem",
+  // padding: ".25rem",
   cursor: "pointer",
   position: "relative",
   overflow: "hidden",
+  width: 540,
 
   display: "flex",
   alignItems: "center",

@@ -12,6 +12,7 @@ export function HomeContainer() {
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 3,
+      spacing: 48
     },
   });
 
@@ -28,6 +29,13 @@ export function HomeContainer() {
         <Image src={shirt2} width={520} height={480} alt="Camiseta Y" />
         <footer>
           <strong>Camiseta Y</strong>
+          <span>R$ 79,90</span>
+        </footer>
+      </Product>
+      <Product className="keen-slider__slide">
+        <Image src={shirt3} width={520} height={480} alt="Camiseta Z" />
+        <footer>
+          <strong>Camiseta Z</strong>
           <span>R$ 79,90</span>
         </footer>
       </Product>
