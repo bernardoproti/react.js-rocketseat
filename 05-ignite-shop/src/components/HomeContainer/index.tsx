@@ -8,7 +8,7 @@ import shirt3 from "@/assets/shirts/3.png";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.css";
 
-export function HomeContainer() {
+export function HomeContainer(props) {
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 3,
@@ -18,6 +18,8 @@ export function HomeContainer() {
 
   return (
     <Container ref={sliderRef} className="keen-slider">
+      <pre>{JSON.stringify(props.list)}</pre>
+
       <Product className="keen-slider__slide">
         <Image src={shirt1} width={520} height={480} alt="Camiseta X" />
         <footer>
@@ -48,4 +50,12 @@ export function HomeContainer() {
       </Product>
     </Container>
   );
+}
+
+export const getServerSideProps = () => {
+  return {
+    props: {
+      list: [1, 2, 3]
+    }
+  }
 }
