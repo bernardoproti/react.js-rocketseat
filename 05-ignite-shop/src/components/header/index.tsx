@@ -1,11 +1,11 @@
 import Image from "next/image";
 import logoImg from "@/assets/logo.svg";
-import { Header } from "./styles";
+import { HeaderContainer } from "./styles";
 
-export function HeaderContainer() {
+export function Header() {
   return (
-    <Header>
+    <HeaderContainer>
       <Image src={logoImg} alt="" />
-    </Header>
+    </HeaderContainer>
   )
 }

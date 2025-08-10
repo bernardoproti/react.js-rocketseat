@@ -1,6 +1,6 @@
 import { styled } from "@/styles";
 
-export const Header = styled("header", {
+export const HeaderContainer = styled("header", {
   padding: "2rem 0",
   width: "100%",
   maxWidth: 1180,
