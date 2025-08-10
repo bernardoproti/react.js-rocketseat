@@ -19,7 +19,7 @@ export const globalStyles = globalCss({
   },
 })
 
-export const Container = styled("div", {
+export const Wrapper = styled("div", {
   display: "flex",
   flexDirection: "column",
   alignItems: "flex-start",

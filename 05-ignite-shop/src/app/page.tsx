@@ -2,7 +2,7 @@ import { stripe } from "@/lib/stripe";
 import type Stripe from "stripe";
 import { Slider } from "@/components/slider";
 
-interface Product {
+export interface Product {
   id: string;
   name: string;
   imageUrl: string;
