@@ -18,7 +18,6 @@ export async function generateStaticParams() {
   });
   const products = response.data;
 
-  
   return products.map((product) => ({ id: product.id }));
 }
 
