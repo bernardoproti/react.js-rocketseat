@@ -4,11 +4,25 @@ import { ImageContainer, ProductContainer, ProductDetails } from "./styles";
 import type Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
 
+export const revalidate = 3600; 
+export const dynamicParams = true; 
+
 interface ProductDetails extends Product {
   description: string;
 }
 
-export default async function Product({ params }: { params: { id: string } }) {
+export async function generateStaticParams() {
+  // Buscar todos os produtos ou definir IDs específicos para pré-renderizar
+  const response = await stripe.products.list({
+    limit: 3, // Limitar para os primeiros 3 produtos, por exemplo
+  });
+  const products = response.data;
+
+  
+  return products.map((product) => ({ id: product.id }));
+}
+
+export default async function Product({ params }: { params: Promise<{ id: string }> }) {
   const { id: productId } = await params;
 
   const response = await stripe.products.retrieve(productId, {

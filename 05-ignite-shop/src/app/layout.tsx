@@ -1,4 +1,3 @@
-import "./globals.css";
 import { getCssText } from "@/styles";
 import { Wrapper, globalStyles } from "@/styles/global";
 import { Roboto } from "next/font/google";
